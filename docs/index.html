@@ -124,7 +124,7 @@
 <body>
     <div class="header">
         <p>SAE</p> <!-- ここがヘッダータイトル -->
-        <div class="hamburger" onclick="toggleMenu()">☰</div>
+        <div class="hamburger" id="hamburger">☰</div>
         <ul id="menu">
             <li><a href="#about">SAEとは</a></li>
             <li><a href="#install">導入方法</a></li>
@@ -197,6 +197,9 @@
             var menu = document.getElementById('menu');
             menu.classList.toggle('active');
         }
+
+        var hamburger = document.getElementById('hamburger');
+        hamburger.addEventListener('click', toggleMenu);
     </script>
 </body>
 
