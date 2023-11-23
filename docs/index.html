@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>SAE Chrome Extension</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #f8f9fa;
+            padding: 10px 0;
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header p {
+            margin-left: 20px;
+        }
+
+        .header ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            margin-right: 20px;
+        }
+
+        .header li {
+            float: left;
+        }
+
+        .header li a {
+            display: block;
+            color: black;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .header li a:hover {
+            background-color: #ddd;
+        }
+
+        .section {
+            margin: 80px 0;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        .hamburger {
+            margin-right: 2em;
+            display: none;
+            cursor: pointer;
+            font-size: 30px;
+        }
+
+        @media screen and (max-width: 600px) {
+            .header ul {
+                position: absolute;
+                top: 60px;
+                right: 20px;
+                width: 200px;
+                display: none;
+                flex-direction: column;
+                background-color: #f8f9fa;
+            }
+
+            .header ul.active {
+                display: flex;
+            }
+
+            .header li {
+                float: none;
+                width: 100%;
+            }
+
+            .hamburger {
+                display: block;
+            }
+        }
+
+        .hero {
+            position: relative;
+            height: 500px;
+        }
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('./screenshot.png');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            filter: blur(4px);
+            z-index: -1;
+        }
+        .hero-text {
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: whitesmoke;
+            font-size: 30px;
+            font-family: serif;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <p>SAE</p> <!-- ここがヘッダータイトル -->
+        <div class="hamburger" onclick="toggleMenu()">☰</div>
+        <ul id="menu">
+            <li><a href="#about">SAEとは</a></li>
+            <li><a href="#install">導入方法</a></li>
+            <li><a href="#disclaimer">免責</a></li>
+            <li><a href="#privacy">プライバシーポリシー</a></li>
+        </ul>
+    </div>
+
+    <div class="hero">
+        <div class="hero-text">もう, 時間を取らせない</div>
+    </div>
+
+    <div id="about" class="section">
+        <h1>SAEとは</h1>
+        <p>SAEは、Academic Express 3を進める上で強力な手助けとなるChrome拡張機能です。</p>
+    </div>
+
+    <div id="install" class="section">
+        <h1>導入方法</h1>
+        <p>w.i.p</p>
+    </div>
+
+    <div id="disclaimer" class="section">
+        <h1>免責</h1>
+        <p>この拡張機能は研究用または教育用です。非倫理的なことに使用しないでください。作者はこの拡張機能によって引き起こされるいかなる問題にも責任を負いません。</p>
+    </div>
+
+    <div id="privacy" class="section">
+        <h1>プライバシーポリシー</h1>
+        <p><strong>提供者:</strong> Etwcq6072</p>
+        <p><strong>最終更新日:</strong> 2023/11/23</p>
+
+        <h2>1. 収集する情報:</h2>
+        <p>SAEは、ライセンス認証の履歴と利用回数のみを収集します。</p>
+
+        <h2>2. 個人情報の非収集:</h2>
+        <p>SAEは、これ以外の一切の個人情報（例: ユーザーの名前、アドレス、連絡先など）を収集しません。</p>
+
+        <h2>3. 情報の使用目的:</h2>
+        <p>収集された情報は、ライセンス認証の目的でのみ使用され、利用回数の統計情報として利用されます。</p>
+
+        <h2>4. 第三者への共有:</h2>
+        <p>SAEは、収集した情報を第三者と共有しません。</p>
+
+        <h2>5. セキュリティ:</h2>
+        <p>収集された情報は適切なセキュリティ対策を講じ、権限のないアクセスを防ぎます。</p>
+
+        <h2>6. ユーザーの権利:</h2>
+        <p>ユーザーはいつでも収集された情報へのアクセスをリクエストできます。情報の修正や削除の要望にも対応します。</p>
+
+        <h2>7. Cookieの使用:</h2>
+        <p>SAEはクッキーを使用しません。</p>
+
+        <h2>8. 変更通知:</h2>
+        <p>プライバシーポリシーが変更された場合、変更内容を通知します。</p>
+
+        <h2>9. お問い合わせ先:</h2>
+        <p>プライバシーポリシーに関する質問や懸念がある場合は、etwcq6072[at]gmail.comまでご連絡ください。</p>
+
+        <h2>10. 法令順守:</h2>
+        <p>SAEは適用される法令や規制に順守します。</p>
+    </div>
+
+    <footer style="text-align: center; padding: 20px 0;">
+        &copy; 2023 Etwcq
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            var menu = document.getElementById('menu');
+            menu.classList.toggle('active');
+        }
+    </script>
+</body>
+
+</html>
