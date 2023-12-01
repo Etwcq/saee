@@ -122,6 +122,38 @@
                 display: block;
             }
         }
+
+        button {
+            width: 100%;
+            /* Full width */
+            text-align: center;
+            /* Centered text */
+            background-color: #ffffff;
+            /* Cyan color */
+            border: none;
+            /* No border for a flat design */
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+            /* Shadow effect */
+            border-radius: 25px;
+            /* Rounded corners */
+            padding: 10px;
+            /* Some padding */
+            font-size: 18px;
+            /* Increase font size */
+            color: rgb(0, 0, 0);
+            /* White text color */
+            cursor: pointer;
+            /* Pointer cursor on hover */
+            transition: all 0.3s ease 0s;
+            /* Add transitions */
+        }
+
+        button:hover {
+            background-color: #e6ffff;
+            /* Change background color on hover */
+            box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.2);
+            /* Change shadow effect on hover */
+        }
     </style>
 </head>
 
@@ -131,7 +163,8 @@
         <div class="hamburger" id="hamburger">☰</div>
         <ul id="menu">
             <li><a href="#about">SAEとは</a></li>
-            <li><a href="#install">導入方法</a></li>
+            <li><a href="#installation">導入方法</a></li>
+            <li><a href="#versions">バージョン履歴</a></li>
             <li><a href="#disclaimer">免責</a></li>
             <li><a href="#privacy">プライバシーポリシー</a></li>
         </ul>
@@ -146,9 +179,15 @@
         <p>SAEは、Academic Express 3を進める上で強力な手助けとなるChrome拡張機能です。</p>
     </div>
 
-    <div id="install" class="section">
+    <div id="installation" class="section">
         <h1>導入方法</h1>
         <p>w.i.p</p>
+    </div>
+
+    <div id="versions" class="section">
+        <h1>バージョン履歴</h1>
+        <div id="versionview"></div>
+        <button id="showall" style="display: none;">全てのバージョンを表示</button>
     </div>
 
     <div id="disclaimer" class="section">
@@ -215,6 +254,59 @@
 
         var hamburger = document.getElementById('hamburger');
         hamburger.addEventListener('click', toggleMenu);
+
+        window.addEventListener('DOMContentLoaded', (event) => {
+            fetch('https://raw.githubusercontent.com/Etwcq/saee.health/main/files/versions.xml')
+                .then(response => response.text())
+                .then(data => {
+                    let parser = new DOMParser();
+                    let xmlDoc = parser.parseFromString(data, "text/xml");
+
+                    let versions = xmlDoc.getElementsByTagName('version');
+                    let versionView = document.getElementById('versionview');
+
+                    // Create a "Show All" button and hide it initially
+                    let showAllButton = document.getElementById('showall');
+                    const revToVersion = (rev) => {
+                        const major = Math.floor(rev / 100);
+                        const minor = Math.floor((rev % 100) / 10);
+                        const patch = (rev % 100) % 10;
+
+                        return `${major}.${minor}.${patch}`;
+                    }
+
+                    for (let i = versions.length - 1; i >= versions.length - 3; i--) {
+                        let rev = versions[i].getElementsByTagName('rev')[0].textContent;
+                        let date = versions[i].getElementsByTagName('date')[0].textContent;
+                        let description = versions[i].getElementsByTagName('description')[0].textContent;
+
+                        let versionInfo = document.createElement('div');
+                        versionInfo.innerHTML = `<h2>Version ${revToVersion(parseInt(rev))}</h2><p>Date: ${date}</p><p>${description}</p>`;
+                        versionView.appendChild(versionInfo);
+                    }
+
+                    // If there are more than 3 versions, show the "Show All" button
+                    if (versions.length > 3) {
+                        showAllButton.style.display = 'block';
+                    }
+
+                    // When the "Show All" button is clicked, display the rest of the versions
+                    showAllButton.addEventListener('click', function () {
+                        for (let i = versions.length - 4; i >= 0; i--) {
+                            let rev = versions[i].getElementsByTagName('rev')[0].textContent;
+                            let date = versions[i].getElementsByTagName('date')[0].textContent;
+                            let description = versions[i].getElementsByTagName('description')[0].textContent;
+
+                            let versionInfo = document.createElement('div');
+                            versionInfo.innerHTML = `<h2>Version ${revToVersion(parseInt(rev))}</h2><p>Date: ${date}</p><p>${description}</p>`;
+                            versionView.appendChild(versionInfo);
+                        }
+
+                        // Hide the "Show All" button after it's clicked
+                        showAllButton.style.display = 'none';
+                    });
+                });
+        });
     </script>
 </body>
 
